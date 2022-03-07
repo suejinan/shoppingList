@@ -10,6 +10,37 @@ input.addEventListener('keypress',(e)=>{
   if(key === 'Enter') addItem();
 });
 
+// 이벤트 위임 (event deligation)
+list.addEventListener('click', event => {
+  const tagName = event.target.tagName;
+  if (tagName == 'LI') {
+    event.target.classList.toggle('checked');
+  } else if (tagName == 'DIV') {
+    event.target.parentNode.classList.toggle('checked');
+  }
+
+  if (tagName == 'I') { // trash can icon
+    const parent = event.target.parentElement.parentElement;
+    list.removeChild(parent);
+  }
+
+});
+
+list.addEventListener('mouseover', (event) => {
+  if (event.target.tagName == 'LI') {
+    const child = event.target.querySelector('.delete');
+    child.classList.add('hover');
+  }
+});
+
+list.addEventListener('mouseout', (event) => {
+  if (event.target.tagName == 'LI') {
+    const child = event.target.querySelector('.delete');
+    child.classList.remove('hover');
+  }
+});
+
+// 신규 아이템 추가
 function addItem() {
   if(input.value.trim() !== '') {
     const newItem = createItem(input.value);
@@ -23,32 +54,20 @@ function addItem() {
   input.focus();
 }
 
+// 아이템 생성
 function createItem(input) {
   const newItem = document.createElement('li');
   const text = document.createElement('div');
 
   text.innerHTML = input;
   text.setAttribute('class','text');
-  text.addEventListener('click', ()=>{
-    text.classList.toggle('checked');
-  });
   
   const btnDel = document.createElement('button');
   btnDel.innerHTML= '<i class="fa-regular fa-trash-can"></i>';
   btnDel.setAttribute('class','delete');
-  btnDel.addEventListener('click', ()=> {
-      list.removeChild(newItem);
-  });
   
   newItem.appendChild(text);
   newItem.appendChild(btnDel);
-    
-  newItem.addEventListener('mouseover', () => {
-    btnDel.classList.add('hover');
-  });
-  newItem.addEventListener('mouseout', () => {
-    btnDel.classList.remove('hover');
-  });
   
   return newItem;
 }
