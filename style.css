@@ -1,0 +1,104 @@
+:root {
+  --accent-color: #eceaea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e4e4e4;
+  overflow: hidden;
+}
+
+.mainApp {
+  width: 350px;
+  height: 700px;
+  margin: auto;
+  background-color: #fafafa;
+  border-radius: 40px;
+
+  -webkit-box-shadow: 7px 5px 8px -4px rgba(0, 0, 0, 0.81);
+  box-shadow: 7px 5px 8px -4px rgba(0, 0, 0, 0.81);
+}
+
+header {
+  height: 120px;
+  margin: 10px 20px;
+  border-bottom: 0.5px solid black;
+  padding: 30px 5px 0px 5px;
+}
+
+footer {
+  height: 100px;
+  margin: auto;
+}
+
+.banner {
+  margin: 5px;
+}
+
+ul {
+  height: 450px;
+  padding: 0;
+  z-index: 1;
+  overflow: scroll;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between; /* 구성요소 띄우기 */
+  margin: 15px 30px;
+  padding: 10px;
+  border-bottom: 1px dotted darkgray;
+}
+
+.inputBox {
+  margin: 20px 30px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between; /* 구성요소 띄우기 */
+  border-radius: 8px;
+  background-color: var(--accent-color);
+  z-index: 2;
+}
+.input__text {
+  border: none;
+  background-color: var(--accent-color);
+}
+
+.text {
+  display: inline-block;
+}
+.text:hover {
+  cursor: pointer;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: darkgray;
+  font-style: italic;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+button:hover {
+  opacity: 100%;
+}
+
+.delete {
+  opacity: 0%;
+  color: red;
+}
+.hover {
+  opacity: 100%;
+  transition: all 200ms ease-in;
+}
+
+.add {
+  opacity: 50%;
+}
