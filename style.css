@@ -38,22 +38,6 @@ footer {
   margin: 5px;
 }
 
-ul {
-  height: 450px;
-  padding: 0;
-  z-index: 1;
-  overflow: scroll;
-}
-
-li {
-  list-style: none;
-  display: flex;
-  justify-content: space-between; /* 구성요소 띄우기 */
-  margin: 15px 30px;
-  padding: 10px;
-  border-bottom: 1px dotted darkgray;
-}
-
 .inputBox {
   margin: 20px 30px;
   padding: 10px;
@@ -68,11 +52,32 @@ li {
   background-color: var(--accent-color);
 }
 
-.text {
-  display: inline-block;
+/* LIST */
+ul {
+  height: 450px;
+  padding: 0;
+  z-index: 1;
+  overflow: scroll;
 }
-.text:hover {
+
+li {
+  list-style: none;
+  margin: 15px 30px;
+  border-bottom: 1px dotted darkgray;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between; /* 구성요소 띄우기 */
+  padding: 10px;
+}
+.item:hover {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.item_text {
+  display: inline-block;
 }
 
 .checked {
@@ -91,10 +96,10 @@ button:hover {
 }
 
 .delete {
-  opacity: 0%;
+  opacity: 50%;
   color: red;
 }
-.hover {
+.delete:hover {
   opacity: 100%;
   transition: all 200ms ease-in;
 }

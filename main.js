@@ -10,34 +10,22 @@ input.addEventListener('keypress',(e)=>{
   if(key === 'Enter') addItem();
 });
 
+// 추후 UI 변경에 따른 버그 방지로 태그사용해 부모/자식 호출방식 지양
 // 이벤트 위임 (event deligation)
 list.addEventListener('click', event => {
-  const tagName = event.target.tagName;
-  if (tagName == 'LI') {
-    event.target.classList.toggle('checked');
-  } else if (tagName == 'DIV') {
-    event.target.parentNode.classList.toggle('checked');
+  const target = event.target;
+  const itemId = target.dataset.id;
+  const targetId = target.dataset.target_id;
+  if (itemId) {
+    const toggleItem = document.querySelector(`.item[data-id="${itemId}"]`);
+    toggleItem.classList.toggle('checked');
   }
 
-  if (tagName == 'I') { // trash can icon
-    const parent = event.target.parentElement.parentElement;
-    list.removeChild(parent);
+  if (targetId) {
+    const delItem = document.querySelector(`.row[data-id="${targetId}"]`);
+    delItem.remove();
   }
 
-});
-
-list.addEventListener('mouseover', (event) => {
-  if (event.target.tagName == 'LI') {
-    const child = event.target.querySelector('.delete');
-    child.classList.add('hover');
-  }
-});
-
-list.addEventListener('mouseout', (event) => {
-  if (event.target.tagName == 'LI') {
-    const child = event.target.querySelector('.delete');
-    child.classList.remove('hover');
-  }
 });
 
 // 신규 아이템 추가
@@ -55,19 +43,21 @@ function addItem() {
 }
 
 // 아이템 생성
+let id = 0;
 function createItem(input) {
   const newItem = document.createElement('li');
-  const text = document.createElement('div');
+  newItem.setAttribute('class', 'row')
+  newItem.setAttribute('data-id', id);
 
-  text.innerHTML = input;
-  text.setAttribute('class','text');
+  newItem.innerHTML = `
+    <div class="item" data-id=${id}>
+      <span class="item_text" data-id=${id}>${input}</span>
+      <button class="delete">
+        <i class="fa-regular fa-trash-can" data-target_id = ${id}></i>
+      </button>
+    </div>
+  `;
   
-  const btnDel = document.createElement('button');
-  btnDel.innerHTML= '<i class="fa-regular fa-trash-can"></i>';
-  btnDel.setAttribute('class','delete');
-  
-  newItem.appendChild(text);
-  newItem.appendChild(btnDel);
-  
+  id++;
   return newItem;
 }
