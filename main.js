@@ -1,19 +1,14 @@
 'use strict';
 
 const input = document.querySelector('.input__text');
+const form = document.querySelector('.inputBox');
 const add = document.querySelector('.add');
 const list = document.querySelector('ul')
 
-add.addEventListener('click', addItem);
-
-//Deprecated : keypress -> keydown
-// keydown (isComposing: false), keyup (isComposing: true)
-input.addEventListener('keydown',(e)=>{
-  if(e.isComposing || e.keyCode === 229) { 
-    // 버그방지: IME composition 중 이벤트방지 (한국어,일본어 등)
-    return;
-  }
-  if(e.key === 'Enter') addItem();
+form.addEventListener('submit', (event)=> {
+  // submit 이벤트 발생시 페이지 자동새로고침 방지
+  event.preventDefault();
+  addItem();
 });
 
 // 추후 UI 변경에 따른 버그 방지로 태그사용해 부모/자식 호출방식 지양
@@ -58,8 +53,8 @@ function createItem(input) {
   newItem.innerHTML = `
     <div class="item" data-id=${id}>
       <span class="item_text" data-id=${id}>${input}</span>
-      <button class="delete">
-        <i class="fa-regular fa-trash-can" data-target_id = ${id}></i>
+      <button>
+        <i class="delete fa-regular fa-trash-can" data-target_id = ${id}></i>
       </button>
     </div>
   `;

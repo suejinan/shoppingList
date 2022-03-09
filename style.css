@@ -48,6 +48,7 @@ footer {
   z-index: 2;
 }
 .input__text {
+  width: 100%;
   border: none;
   background-color: var(--accent-color);
 }
@@ -71,13 +72,13 @@ li {
   justify-content: space-between; /* 구성요소 띄우기 */
   padding: 10px;
 }
-.item:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
 
 .item_text {
   display: inline-block;
+}
+.item_text:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .checked {
@@ -88,11 +89,9 @@ li {
 
 button {
   border: none;
+  padding: 5px 10px;
   cursor: pointer;
   background: transparent;
-}
-button:hover {
-  opacity: 100%;
 }
 
 .delete {
@@ -104,6 +103,6 @@ button:hover {
   transition: all 200ms ease-in;
 }
 
-.add {
+/* .add {
   opacity: 50%;
-}
+} */
