@@ -5,9 +5,15 @@ const add = document.querySelector('.add');
 const list = document.querySelector('ul')
 
 add.addEventListener('click', addItem);
-input.addEventListener('keypress',(e)=>{
-  const key = e.key;
-  if(key === 'Enter') addItem();
+
+//Deprecated : keypress -> keydown
+// keydown (isComposing: false), keyup (isComposing: true)
+input.addEventListener('keydown',(e)=>{
+  if(e.isComposing || e.keyCode === 229) { 
+    // 버그방지: IME composition 중 이벤트방지 (한국어,일본어 등)
+    return;
+  }
+  if(e.key === 'Enter') addItem();
 });
 
 // 추후 UI 변경에 따른 버그 방지로 태그사용해 부모/자식 호출방식 지양
